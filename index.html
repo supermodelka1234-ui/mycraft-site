@@ -1,0 +1,656 @@
+```html
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MyCraft RP — Minecraft Server</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b0d12;
+            color: white;
+        }
+
+        /* HEADER */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+
+            background: rgba(10, 12, 18, 0.95);
+            border-bottom: 1px solid #252936;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: auto;
+
+            height: 70px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: #55ff55;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: #55ff55;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 100px 20px 50px;
+
+            background:
+                radial-gradient(circle at center, #183b20 0%, #0b0d12 55%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 70px;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .green {
+            color: #55ff55;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #b9beca;
+            margin-bottom: 35px;
+        }
+
+        .server-ip {
+            display: inline-block;
+
+            padding: 15px 25px;
+
+            background: #151922;
+            border: 1px solid #303642;
+            border-radius: 10px;
+
+            margin-bottom: 30px;
+
+            font-family: monospace;
+            font-size: 18px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 15px 30px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+            border: none;
+
+            font-size: 16px;
+        }
+
+        .btn-green {
+            background: #55ff55;
+            color: #071007;
+        }
+
+        .btn-green:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(85, 255, 85, 0.25);
+        }
+
+        .btn-dark {
+            background: #1b202a;
+            color: white;
+        }
+
+        .btn-dark:hover {
+            background: #292f3b;
+        }
+
+        /* SECTIONS */
+
+        section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 100px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .section-description {
+            text-align: center;
+            color: #9da3b0;
+            margin-bottom: 50px;
+        }
+
+        /* DONATE */
+
+        .donate-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(250px, 1fr));
+
+            gap: 25px;
+        }
+
+        .card {
+            background: #12161f;
+
+            border: 1px solid #292f3a;
+
+            border-radius: 15px;
+
+            padding: 30px;
+
+            text-align: center;
+
+            transition: 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #55ff55;
+        }
+
+        .card h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 38px;
+            font-weight: 900;
+            color: #55ff55;
+            margin-bottom: 20px;
+        }
+
+        .card ul {
+            list-style: none;
+            color: #b7bdc8;
+            line-height: 2;
+            margin-bottom: 25px;
+        }
+
+        /* FEATURES */
+
+        .features {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(250px, 1fr));
+
+            gap: 20px;
+        }
+
+        .feature {
+            background: #12161f;
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid #252b36;
+        }
+
+        .feature h3 {
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: #9da3b0;
+            line-height: 1.6;
+        }
+
+        /* RULES */
+
+        .rules {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .rule {
+            background: #12161f;
+            margin-bottom: 10px;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #252b36;
+        }
+
+        .rule strong {
+            color: #55ff55;
+        }
+
+        /* DISCORD */
+
+        .discord {
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #161b27,
+                    #10131a
+                );
+
+            border-radius: 20px;
+
+            padding: 60px 20px;
+
+            border: 1px solid #303642;
+        }
+
+        .discord h2 {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .discord p {
+            color: #aeb4c0;
+            margin-bottom: 25px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+
+            padding: 35px 20px;
+
+            border-top: 1px solid #252a35;
+
+            color: #777e8b;
+        }
+
+        /* POPUP */
+
+        .popup {
+            position: fixed;
+
+            left: 50%;
+            bottom: 30px;
+
+            transform: translate(-50%, 100px);
+
+            background: #1b2029;
+
+            border: 1px solid #55ff55;
+
+            padding: 18px 25px;
+
+            border-radius: 10px;
+
+            z-index: 9999;
+
+            opacity: 0;
+
+            transition: 0.3s;
+        }
+
+        .popup.show {
+            transform: translate(-50%, 0);
+            opacity: 1;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .hero h1 {
+                font-size: 45px;
+            }
+
+            nav a {
+                margin-left: 10px;
+                font-size: 14px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="nav">
+
+        <div class="logo">
+            ⛏ MYCRAFT RP
+        </div>
+
+        <nav>
+            <a href="#home">Головна</a>
+            <a href="#donate">Донат</a>
+            <a href="#rules">Правила</a>
+            <a href="#discord">Discord</a>
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <h1>
+            MYCRAFT <span class="green">RP</span>
+        </h1>
+
+        <p>
+            Сучасний Minecraft RP сервер.
+            Створюй власну історію разом з іншими гравцями.
+        </p>
+
+        <div class="server-ip">
+            IP: play.mycraftrp.com
+        </div>
+
+        <div class="buttons">
+
+            <a
+                href="#donate"
+                class="btn btn-green"
+            >
+                💎 Донат
+            </a>
+
+            <a
+                href="#discord"
+                class="btn btn-dark"
+            >
+                💬 Discord
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- DONATE -->
+
+<section id="donate">
+
+    <h2 class="section-title">
+        💎 Донат
+    </h2>
+
+    <p class="section-description">
+        Підтримай сервер та отримай додаткові можливості.
+    </p>
+
+
+    <div class="donate-grid">
+
+
+        <!-- VIP -->
+
+        <div class="card">
+
+            <h3>VIP</h3>
+
+            <div class="price">
+                $3
+            </div>
+
+            <ul>
+                <li>✔ VIP префікс</li>
+                <li>✔ VIP чат</li>
+                <li>✔ /fly</li>
+                <li>✔ Додаткові косметичні предмети</li>
+            </ul>
+
+            <button
+                class="btn btn-green"
+                onclick="buy('VIP')"
+            >
+                Купити
+            </button>
+
+        </div>
+
+
+        <!-- PREMIUM -->
+
+        <div class="card">
+
+            <h3>PREMIUM</h3>
+
+            <div class="price">
+                $7
+            </div>
+
+            <ul>
+                <li>✔ Все з VIP</li>
+                <li>✔ PREMIUM префікс</li>
+                <li>✔ Більше косметики</li>
+                <li>✔ Особливі команди</li>
+            </ul>
+
+            <button
+                class="btn btn-green"
+                onclick="buy('PREMIUM')"
+            >
+                Купити
+            </button>
+
+        </div>
+
+
+        <!-- DELUXE -->
+
+        <div class="card">
+
+            <h3>DELUXE</h3>
+
+            <div class="price">
+                $15
+            </div>
+
+            <ul>
+                <li>✔ Все з PREMIUM</li>
+                <li>✔ DELUXE префікс</li>
+                <li>✔ Ексклюзивні предмети</li>
+                <li>✔ Особливі можливості</li>
+            </ul>
+
+            <button
+                class="btn btn-green"
+                onclick="buy('DELUXE')"
+            >
+                Купити
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section>
+
+    <h2 class="section-title">
+        ⭐ Можливості сервера
+    </h2>
+
+    <p class="section-description">
+        Те, що робить наш сервер особливим.
+    </p>
+
+
+    <div class="features">
+
+        <div class="feature">
+
+            <h3>🏙 RP місто</h3>
+
+            <p>
+                Живи в місті, працюй, заробляй гроші
+                та створюй власну історію.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <h3>💰 Економіка</h3>
+
+            <p>
+                Роботи, зарплати, магазини, банки
+                та власний бізнес.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <h3>🚓 Поліція</h3>
+
+            <p>
+                Поліцейські, злочинці,
+                погоні та RP-ситуації.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <h3>🏠 Будинки</h3>
+
+            <p>
+                Купуй нерухомість та створюй
+                власний будинок.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- RULES -->
+
+<section id="rules">
+
+    <h2 class="section-title">
+        📜 Правила
+    </h2>
+
+    <p class="section-description">
+        Основні правила нашого сервера.
+    </p>
+
+
+    <div class="rules">
+
+        <div class="rule">
+            <strong>01.</strong>
+            Не використовуй чити та сторонні програми.
+        </div>
+
+        <div class="rule">
+            <strong>02.</strong>
+            Не ображай інших гравців.
+        </div>
+
+        <div class="rule">
+            <strong>03.</strong>
+            Не використовуй баги сервера.
+        </div>
+
+        <div class="rule">
+            <strong>04.</strong>
+            Дотримуйся правил RP.
+        </div>
+
+        <div class="rule">
+            <strong>05.</strong>
+            Слухай адміністрацію сервера.
+        </div>
+
+    </div>
+
+</section>
+
+
+<!--
+```
